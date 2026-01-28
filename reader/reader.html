@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast Reader</title>
+  <link rel="stylesheet" href="reader.css">
+</head>
+<body>
+  <!-- This file is for standalone testing of the reader component -->
+  <div id="fast-reader-overlay">
+    <div id="fast-reader-header">
+      <span id="fast-reader-title">Fast Reader</span>
+      <button id="fast-reader-close">&times;</button>
+    </div>
+
+    <div id="fast-reader-display">
+      <div id="fast-reader-guides">
+        <div id="fast-reader-vertical-line"></div>
+        <div id="fast-reader-horizontal-line"></div>
+      </div>
+
+      <div id="fast-reader-word-container">
+        <div id="fast-reader-word">
+          <span class="left"></span><span class="orp"></span><span class="right"></span>
+        </div>
+      </div>
+
+      <div id="fast-reader-progress-container">
+        <div id="fast-reader-progress">
+          <div id="fast-reader-progress-bar"></div>
+        </div>
+        <div id="fast-reader-progress-text">0 / 0 words</div>
+      </div>
+    </div>
+
+    <div id="fast-reader-controls">
+      <button class="fast-reader-btn" id="fast-reader-back">&larr; Back</button>
+      <button class="fast-reader-btn primary" id="fast-reader-play">Play</button>
+      <button class="fast-reader-btn" id="fast-reader-forward">Forward &rarr;</button>
+    </div>
+  </div>
+
+  <script src="reader.js"></script>
+  <script>
+    // Test with sample text
+    const sampleText = `Speed reading is a collection of methods that attempt to increase rates of reading without greatly reducing comprehension or retention. Methods include chunking and minimizing subvocalization. The many available speed reading training programs may use books, videos, software, and seminars.`;
+
+    window.FastReader.start(sampleText, 300, true);
+  </script>
+</body>
+</html>

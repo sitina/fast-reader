@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast Reader</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Fast Reader</h1>
+
+    <div class="speed-control">
+      <label for="speed-slider">Reading Speed</label>
+      <div class="speed-display">
+        <span id="speed-value">300</span> WPM
+      </div>
+      <input type="range" id="speed-slider" min="100" max="800" value="300" step="25">
+      <div class="speed-labels">
+        <span>100</span>
+        <span>800</span>
+      </div>
+    </div>
+
+    <div class="options">
+      <label class="checkbox-label">
+        <input type="checkbox" id="smart-pauses" checked>
+        <span>Smart pauses (long words, punctuation)</span>
+      </label>
+    </div>
+
+    <div class="actions">
+      <button id="read-page" class="btn primary">Read This Page</button>
+      <button id="read-selection" class="btn secondary">Read Selection</button>
+    </div>
+
+    <div id="status" class="status"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

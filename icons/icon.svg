@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="url(#bg)" stroke="#0f3460" stroke-width="4"/>
+  <!-- Speed lines (representing fast reading) -->
+  <path d="M28 44 L68 44" stroke="#4a5568" stroke-width="6" stroke-linecap="round"/>
+  <path d="M28 64 L88 64" stroke="#e94560" stroke-width="8" stroke-linecap="round"/>
+  <path d="M28 84 L58 84" stroke="#4a5568" stroke-width="6" stroke-linecap="round"/>
+  <!-- ORP indicator dot -->
+  <circle cx="58" cy="64" r="6" fill="#e94560"/>
+  <!-- Vertical alignment line -->
+  <line x1="58" y1="34" x2="58" y2="94" stroke="#e94560" stroke-width="2" opacity="0.5"/>
+</svg>
