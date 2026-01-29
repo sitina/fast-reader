@@ -76,6 +76,10 @@ fast-reader/
     └── icon128.png
 ```
 
+## Privacy
+
+Fast Reader does not collect, store, or transmit any personal data. See [PRIVACY_POLICY.md](PRIVACY_POLICY.md) for details.
+
 ## License
 
 MIT
