@@ -17,6 +17,7 @@ packages/mobile/android/build/
 packages/mobile/ios/build/
 packages/mobile/ios/Pods/
 packages/mobile/ios/Podfile.lock
+packages/mobile/ios/.xcode.env.local
 
 # Metro bundler
 packages/mobile/.metro-health-check*
