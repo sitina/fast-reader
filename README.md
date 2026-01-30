@@ -80,6 +80,10 @@ fast-reader/
 
 Fast Reader does not collect, store, or transmit any personal data. See [PRIVACY_POLICY.md](PRIVACY_POLICY.md) for details.
 
+## Source Code
+
+This project is open source and available on GitHub: https://github.com/sitina/fast-reader
+
 ## License
 
 MIT

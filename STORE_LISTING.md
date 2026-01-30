@@ -37,7 +37,7 @@ PRIVACY FOCUSED
 
 Fast Reader processes all text locally in your browser. No data is collected, stored, or transmitted. Your reading preferences are saved only on your device.
 
-Open source and free forever.
+Open source. View the source code at https://github.com/sitina/fast-reader
 
 ## Category
 Productivity
