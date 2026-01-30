@@ -19,7 +19,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Reader'>;
 
 export default function ReaderScreen({navigation, route}: Props) {
   const {text, title} = route.params;
-  const {settings} = useSettings();
+  const {settings, updateWPM} = useSettings();
 
   const handleFinish = useCallback(() => {
     // Could save progress here
@@ -61,6 +61,14 @@ export default function ReaderScreen({navigation, route}: Props) {
     setTimeout(() => togglePlay(), 100);
   }, [reset, togglePlay]);
 
+  const handleWPMChange = useCallback(
+    (newWPM: number) => {
+      setWPM(newWPM);
+      updateWPM(newWPM);
+    },
+    [setWPM, updateWPM],
+  );
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       {/* Header */}
@@ -97,7 +105,7 @@ export default function ReaderScreen({navigation, route}: Props) {
           onTogglePlay={togglePlay}
           onNavigate={navigate}
         />
-        <SpeedSlider wpm={wpm} onWPMChange={setWPM} />
+        <SpeedSlider wpm={wpm} onWPMChange={handleWPMChange} />
       </View>
 
       {/* Finished overlay */}

@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   orpChar: {
     fontFamily: 'monospace',
     fontSize: fontSize.display,
-    fontWeight: '700',
+    fontWeight: '500',
     color: colors.accent,
     letterSpacing: 2,
   },

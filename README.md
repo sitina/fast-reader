@@ -138,6 +138,87 @@ pnpm mobile:ios
 pnpm mobile:android
 ```
 
+## Testing & Deployment
+
+### Chrome Extension
+
+**Local Testing:**
+1. Open Chrome and navigate to `chrome://extensions`
+2. Enable **Developer mode** (toggle in top-right corner)
+3. Click **Load unpacked** and select `packages/extension`
+4. Test on various websites to ensure content extraction works
+5. After making changes, click the refresh icon on the extension card
+
+**Packaging for Chrome Web Store:**
+```bash
+# From repository root
+./package.sh
+```
+This creates `fast-reader.zip` ready for Chrome Web Store submission.
+
+**Chrome Web Store Submission:**
+1. Go to [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
+2. Click "New Item" and upload `fast-reader.zip`
+3. Fill in store listing details, screenshots, and privacy policy
+4. Submit for review
+
+### Mobile App
+
+**iOS Simulator Testing:**
+```bash
+pnpm install
+pnpm build:core
+cd packages/mobile
+npx pod-install
+pnpm ios
+```
+
+**iOS Device Testing:**
+1. Open `packages/mobile/ios/FastReader.xcworkspace` in Xcode
+2. Select your development team in Signing & Capabilities
+3. Connect your device and select it as the build target
+4. Click Run (Cmd+R)
+
+**Android Emulator Testing:**
+```bash
+pnpm install
+pnpm build:core
+cd packages/mobile
+pnpm android
+```
+
+**Android Device Testing:**
+1. Enable USB debugging on your Android device
+2. Connect via USB and run `pnpm android`
+3. Or generate an APK: `cd packages/mobile/android && ./gradlew assembleRelease`
+
+**Share Extension Testing (iOS):**
+1. Build and run the app on a device or simulator
+2. Open Safari and navigate to any article
+3. Tap the Share button and select "Fast Reader"
+4. The app should open with the article content loaded
+
+**Share Extension Testing (Android):**
+1. Build and run the app on a device or emulator
+2. Open Chrome and navigate to any article
+3. Tap Share and select "Fast Reader"
+4. The app should open with the article content loaded
+
+**App Store Submission (iOS):**
+1. Open Xcode and select Product > Archive
+2. In the Organizer, click "Distribute App"
+3. Follow the prompts to upload to App Store Connect
+4. Complete app metadata in App Store Connect and submit for review
+
+**Play Store Submission (Android):**
+1. Generate a signed release bundle:
+   ```bash
+   cd packages/mobile/android
+   ./gradlew bundleRelease
+   ```
+2. Upload the AAB from `app/build/outputs/bundle/release/` to Google Play Console
+3. Complete store listing and submit for review
+
 ## Privacy
 
 Fast Reader does not collect, store, or transmit any personal data. See [PRIVACY_POLICY.md](PRIVACY_POLICY.md) for details.

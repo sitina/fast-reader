@@ -5,9 +5,16 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-cd "$SCRIPT_DIR"
+EXTENSION_DIR="$SCRIPT_DIR/packages/extension"
+OUTPUT="$SCRIPT_DIR/fast-reader.zip"
 
-OUTPUT="fast-reader.zip"
+# Verify extension directory exists
+if [ ! -d "$EXTENSION_DIR" ]; then
+  echo "Error: Extension directory not found at $EXTENSION_DIR"
+  exit 1
+fi
+
+cd "$EXTENSION_DIR"
 
 # Remove old package if exists
 rm -f "$OUTPUT"
