@@ -1,0 +1,25 @@
+{
+  "name": "fast-reader-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Fast Reader - RSVP reading for web and mobile",
+  "scripts": {
+    "build:core": "pnpm --filter @fast-reader/core build",
+    "dev:core": "pnpm --filter @fast-reader/core dev",
+    "mobile:ios": "pnpm --filter @fast-reader/mobile ios",
+    "mobile:android": "pnpm --filter @fast-reader/mobile android",
+    "mobile:start": "pnpm --filter @fast-reader/mobile start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AceCentre/fast-reader"
+  },
+  "keywords": [
+    "rsvp",
+    "speed-reading",
+    "chrome-extension",
+    "react-native"
+  ],
+  "author": "",
+  "license": "MIT"
+}
