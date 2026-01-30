@@ -30,8 +30,21 @@
      * Tokenize text into words, preserving punctuation
      */
     tokenize(text) {
+      // Insert space after sentence-ending punctuation followed by uppercase letter
+      // Handles: "ended.That" -> "ended. That"
+      let normalized = text.replace(/([.!?])([A-Z])/g, '$1 $2');
+
+      // Insert space after closing punctuation followed by letter
+      // Handles: "(note)The" -> "(note) The"
+      normalized = normalized.replace(/([)\]])([A-Za-z])/g, '$1 $2');
+
+      // Split on em-dashes and double-hyphens
+      // Handles: "word—another" and "word--another"
+      normalized = normalized.replace(/—/g, ' ');
+      normalized = normalized.replace(/--/g, ' ');
+
       // Split on whitespace, filter empty strings
-      return text.split(/\s+/).filter(word => word.length > 0);
+      return normalized.split(/\s+/).filter(word => word.length > 0);
     }
 
     /**
