@@ -1,2 +1,5 @@
 packages:
-  - 'packages/*'
+  - packages/*
+
+patchedDependencies:
+  react-native-share-menu@6.0.0: patches/react-native-share-menu@6.0.0.patch
