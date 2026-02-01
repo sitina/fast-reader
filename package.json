@@ -8,7 +8,10 @@
     "dev:core": "pnpm --filter @fast-reader/core dev",
     "mobile:ios": "pnpm --filter @fast-reader/mobile ios",
     "mobile:android": "pnpm --filter @fast-reader/mobile android",
-    "mobile:start": "pnpm --filter @fast-reader/mobile start"
+    "mobile:start": "pnpm --filter @fast-reader/mobile start",
+    "test": "pnpm --filter @fast-reader/core test && pnpm --filter @fast-reader/mobile test",
+    "test:core": "pnpm --filter @fast-reader/core test",
+    "test:mobile": "pnpm --filter @fast-reader/mobile test"
   },
   "repository": {
     "type": "git",
