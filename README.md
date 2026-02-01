@@ -17,8 +17,10 @@ Speed reading using RSVP (Rapid Serial Visual Presentation) with ORP (Optimal Re
 - Keyboard controls: Space (play/pause), arrows (navigate), Esc (close)
 
 ### Mobile App (iOS/Android)
-- Share articles from any app via Share Sheet / Intent
-- EPUB book reader with progress saving
+- Share articles from any app via iOS Share Extension or Android Intent
+- Automatic article extraction from shared URLs
+- EPUB book reader with chapter navigation
+- Reading speed persists across sessions
 - Gesture controls: tap to play/pause, swipe to navigate
 
 ## Project Structure
@@ -31,7 +33,8 @@ fast-reader/
 │   ├── core/                    # Shared RSVP engine (TypeScript)
 │   │   └── src/
 │   │       ├── rsvp-engine.ts   # Core RSVP logic
-│   │       └── types.ts         # TypeScript types
+│   │       ├── types.ts         # TypeScript types
+│   │       └── __tests__/       # Unit tests (48 tests)
 │   │
 │   ├── extension/               # Chrome Extension
 │   │   ├── manifest.json
@@ -44,11 +47,15 @@ fast-reader/
 │       ├── src/
 │       │   ├── screens/         # App screens
 │       │   ├── components/      # UI components
-│       │   ├── hooks/           # Custom hooks
-│       │   └── services/        # EPUB parser, etc.
-│       ├── ios/                 # iOS native code
+│       │   ├── hooks/           # Custom hooks (useShareIntent, useSettings, etc.)
+│       │   ├── services/        # EPUB parser, etc.
+│       │   └── __tests__/       # Unit tests (26 tests)
+│       ├── ios/
+│       │   ├── FastReader/      # Main app
+│       │   └── ShareExtension/  # iOS Share Extension
 │       └── android/             # Android native code
 │
+├── patches/                     # pnpm patches for dependencies
 ├── package.json                 # Workspace root
 └── pnpm-workspace.yaml
 ```
@@ -103,6 +110,19 @@ pnpm android
 2. **Import EPUB books**: Go to Library tab and tap "Import EPUB"
 3. **Read**: Tap the display to play/pause, swipe left/right to navigate words
 
+## Share Functionality
+
+The mobile app can receive shared content (URLs and text) from other apps:
+
+| Platform | Implementation | Details |
+|----------|---------------|---------|
+| **iOS** | Share Extension | Separate process in `ios/ShareExtension/` that communicates with main app via App Groups |
+| **Android** | Intent Filter | Receives `ACTION_SEND` intents for `text/plain` content |
+
+Both platforms use the same React Native code (`useShareIntent` hook) via `react-native-share-menu`, providing a unified API:
+- When a URL is shared, the app fetches the article content and extracts readable text
+- When plain text is shared, it's loaded directly into the reader
+
 ## How It Works
 
 ### RSVP (Rapid Serial Visual Presentation)
@@ -136,6 +156,11 @@ pnpm dev:core
 pnpm mobile:start
 pnpm mobile:ios
 pnpm mobile:android
+
+# Run tests
+pnpm test              # Run all tests (74 total)
+pnpm test:core         # Run core package tests (48 tests)
+pnpm test:mobile       # Run mobile package tests (26 tests)
 ```
 
 ## Testing & Deployment
