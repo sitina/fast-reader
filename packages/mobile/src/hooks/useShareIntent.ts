@@ -1,5 +1,5 @@
 import {useState, useEffect, useCallback} from 'react';
-import {Platform, Linking} from 'react-native';
+import ShareMenu, {ShareData} from 'react-native-share-menu';
 
 export interface SharedContent {
   text: string;
@@ -63,32 +63,33 @@ export function useShareIntent(): UseShareIntentReturn {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Handle initial URL (app opened via share)
-    const handleInitialUrl = async () => {
-      try {
-        const initialUrl = await Linking.getInitialURL();
-        if (initialUrl) {
-          await handleSharedData(initialUrl);
-        }
-      } catch (error) {
-        console.error('Error handling initial URL:', error);
+    // Handle share data from the share extension
+    const handleShare = async (item: ShareData | null) => {
+      if (!item) {
+        return;
       }
+
+      const {mimeType, data} = item;
+
+      if (!data) {
+        return;
+      }
+
+      await handleSharedData(data, mimeType);
     };
 
-    // Handle URL while app is running
-    const handleUrlEvent = ({url}: {url: string}) => {
-      handleSharedData(url);
-    };
+    // Get initial share data (app opened via share)
+    ShareMenu.getInitialShare(handleShare);
 
-    handleInitialUrl();
-    const subscription = Linking.addEventListener('url', handleUrlEvent);
+    // Listen for new share data while app is running
+    const listener = ShareMenu.addNewShareListener(handleShare);
 
     return () => {
-      subscription.remove();
+      listener.remove();
     };
   }, []);
 
-  const handleSharedData = async (data: string) => {
+  const handleSharedData = async (data: string, mimeType?: string) => {
     setIsLoading(true);
     try {
       // Check if it's a URL
@@ -121,11 +122,6 @@ export function useShareIntent(): UseShareIntentReturn {
   const clearSharedContent = useCallback(() => {
     setSharedContent(null);
   }, []);
-
-  // Note: Full share intent integration requires native setup
-  // For iOS: react-native-share-menu with Share Extension
-  // For Android: Intent filters in AndroidManifest.xml
-  // This hook provides the basic structure and URL handling
 
   return {
     sharedContent,

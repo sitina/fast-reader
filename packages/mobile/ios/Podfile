@@ -33,3 +33,6 @@ target 'FastReader' do
     )
   end
 end
+
+# ShareExtension uses native Swift files only (no pods needed)
+# The extension files are copied directly from react-native-share-menu
